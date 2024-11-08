@@ -1,0 +1,20 @@
+- name: Deploy
+  hosts: '{{server}}'
+  remote_user: web
+  tasks:
+    - block:
+        - name: Variables Check
+          fail:
+            msg: '`server` and `webdir` are the mandatory values to execute the playbook. Variables must be passed via the -e option.'
+          when: 'server is not defined or webdir is not defined'
+        - name: Validate Variables
+          fail:
+            msg: "`server` and `webdir` can't be empty strings."
+          when: server =="" or webdir ==""
+        - name: Copy Files to Root Directory
+          synchronize:
+            src: '{{playbook_dir}}/../../dist/'
+            dest: '/home/web/{{webdir}}'
+            rsync_opts:
+              - '--cvs-exclude'
+              - '--delete'

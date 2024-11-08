@@ -1,0 +1,38 @@
+name: CD PROD
+
+on:
+  push:
+    branches:
+      - PROD
+
+env:
+  WEB_DIR: www.rostro.com
+  SERVER: WEBSCOPEPROD
+  NODE_VERSION: 20.x
+
+jobs:
+  deploy:
+    name: PROD Deployment
+    runs-on: [self-hosted, Linux, x64]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Set Package Auth Token
+        run: npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: ansible-playbook .github/actions/deploy.yaml --extra-vars "server=${{env.SERVER}} webdir=${{env.WEB_DIR}}"
