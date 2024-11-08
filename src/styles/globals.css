@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /** Global range input styles override */
+  input[type='range'] {
+    @apply w-full cursor-pointer appearance-none bg-transparent;
+  }
+  /** Track classes */
+  input[type='range']::-webkit-slider-runnable-track {
+    @apply h-3 rounded-full bg-primary-500;
+  }
+  input[type='range']::-moz-range-track {
+    @apply h-3 rounded-full bg-primary-500;
+  }
+  /** Thumb classes */
+  input[type='range']::-webkit-slider-thumb {
+    @apply h-7 w-7 appearance-none rounded-full bg-primary-500 shadow-[0px_3px_6px_#000000aa] outline outline-4 outline-white;
+    /** margin-top = (track height in px / 2) - (thumb height in px /2) */
+    @apply mt-[calc((12px/2)-(28px/2))];
+  }
+  input[type='range']::-moz-range-thumb {
+    @apply border-none; /* FF only */
+    @apply h-7 w-7 appearance-none rounded-full bg-primary-500 shadow-[0px_3px_6px_#000000aa] outline outline-4 outline-white;
+    /** margin-top = (track height in px / 2) - (thumb height in px /2) */
+    @apply mt-[calc((12px/2)-(28px/2))];
+  }
+}

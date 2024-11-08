@@ -1,0 +1,21 @@
+{
+  "hero-block": {
+    "description": "A diversified fintech and financial services group, on a mission to effect change in financial inclusion at a global level."
+  },
+  "section-2": {
+    "title": "How our companies are creating the foundation for sustainable business",
+    "scopemarkets": {
+      "title": "Personalising access to financial markets",
+      "text": "Rostro’s global retail brokerage arm, which is our diversified, multi-asset financial services brand offering trading and investment services."
+    },
+    "scopeprime": {
+      "title": "A seamless experience across the entire value chain",
+      "text": "By connecting global and local markets in emerging regions, we foster lasting relationships that stand the test of time."
+    }
+  },
+  "section-3": {
+    "title": "Effecting change in global financial inclusion",
+    "text": "We want to be a gateway for financial inclusion and believe in financial well-being for all. Our goal is to see more people become capable participants equipped to achieve their unique financial goals.",
+    "about-rostro-group": "About Rostro Group"
+  }
+}
